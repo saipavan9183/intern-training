@@ -1,20 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from database import SessionLocal
+from database import get_db
 from schemas import TaskCreate
 import task_service
 
 router = APIRouter()
 
-
-def get_db():
-    db = SessionLocal()
-
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("/tasks", status_code=201)
